@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+  *{
+    @apply box-border m-0 p-0;
+  }
+  body{
+    @apply w-full md:max-h-[100vh] md:h-[100vh]; 
+  }
+}
+
+@layer components{
+  .smooth{
+    @apply transition-all duration-150;
+  }
+  .form-input{
+    @apply  w-full text-gray-500 rounded-[5px] font-[500] text-sm p-1 outline-none border-[1px] border-gray-400 flex-[1];
+  }
+  .form-btn{
+    @apply flex justify-center items-center bg-green-700 p-1 rounded-[5px] hover:bg-green-400 border-none outline-none text-white;
+  }
+}
