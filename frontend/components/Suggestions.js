@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import React, { useEffect } from 'react'
 
-const Suggestions = ({ name, id,type }) => {
+const Suggestions = ({ name, id,type,image }) => {
     // useEffect(()=>{})
     return (
         <Link href = {`/view/${id}`}>
         <div className='flex bg-slate-100 cursor-pointer p-3 gap-3 items-center rounded-xl'>
             <div className='w-10 h-10 rounded-full bg-black overflow-hidden'>
-                <img src="/favicon.ico" alt="" />
+                <img src={image} alt="" />
 
             </div>
 

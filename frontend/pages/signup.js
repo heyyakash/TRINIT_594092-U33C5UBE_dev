@@ -3,14 +3,34 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { MdCreate } from 'react-icons/md'
 import { FcBusinessman, FcManager } from 'react-icons/fc'
-import {IoClose } from 'react-icons/io5'
+import { IoClose } from 'react-icons/io5'
 
 const Signup = () => {
     const [type, setType] = useState('Donor');
-    const [interests,setInterests] = useState([])
+    const [interests, setInterests] = useState([])
     const { register, handleSubmit } = useForm()
+    const [loading, setLoading] = useState(false);
+    const [msg, setMsg] = useState("")
 
-    const onSubmit = data => console.log({...data,type,interests})
+    const onSubmit = async (data) => {
+        try {
+            setLoading(true)
+            const d = { ...data, type, interests }
+            const res = await fetch(`http://localhost:5000/${type === "Donor" ? "signup_user" : "signup_ngo"}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(d)
+            })
+            const result = await res.json()
+            setLoading(false)
+            alert(result.message)
+        } catch (error) {
+            setLoading(false)
+            alert("Some Error Occuered")
+        }
+    }
 
     return (
         <div className='w-full md:max-h-[100vh] md:h-[100vh] bg-[url("/login.jpg")] bg-cover grid place-items-center'>
@@ -29,7 +49,7 @@ const Signup = () => {
                     </div>
 
                 </div>
-                <p className='text-sm'>Already have an accound? <span className='text-green-700'><Link href='/login'>Log in!</Link></span></p>
+                <p className='text-sm'>Already have an accound? <span className='text-green-700'><Link href='/'>Log in!</Link></span></p>
                 <hr className='mt-2 w-[80%]' />
                 {type === "NGO" ?
                     <>
@@ -51,7 +71,7 @@ const Signup = () => {
                             </div>
                             <input type="email" id="email" {...register('email', { required: true })} required placeholder='Email Address' className='form-input' />
                             <input type="password" id="password" {...register('password', { required: true })} required placeholder='Password' className='form-input' />
-                            <select name="Type of NGO" id="typeofNGO" className="form-input" {...register('ngotype',{required:true})}>
+                            <select name="Type of NGO" id="typeofNGO" className="form-input" {...register('ngotype', { required: true })}>
                                 <option value="">What kind of problem are your working on?</option>
                                 <option value="Health">Health</option>
                                 <option value="Environment">Environment</option>
@@ -64,7 +84,7 @@ const Signup = () => {
                             </select>
 
 
-                            <button type='submit' className='form-btn'>Sign Up</button>
+                            <button type='submit' className='form-btn'>{loading?"Signing You up..":"Sign up"}</button>
                         </form>
                     </>
                     :
@@ -87,7 +107,7 @@ const Signup = () => {
                                 </select>
                             </div>
                             <div>
-                                <select name="interests" onChange={(e)=>setInterests([...interests,e.target.value])} required label="Choose Your Interests" className='form-input' id="interests">
+                                <select name="interests" onChange={(e) => setInterests([...interests, e.target.value])} required label="Choose Your Interests" className='form-input' id="interests">
                                     <option value="">Choose your Interests</option>
                                     <option value="Health">Health</option>
                                     <option value="Education">Education</option>
@@ -112,7 +132,7 @@ const Signup = () => {
                             <input type="tel" {...register('mobile', { required: true })} className="form-input" required placeholder="Phone Number" />
                             <input type="email" {...register('email', { required: true })} className='form-input' required placeholder='Email Address' />
                             <input type="password" {...register('password', { required: true })} className='form-input' required placeholder='Password' />
-                            <button type='submit' className='form-btn'>Sign Up</button>
+                            <button type='submit' className='form-btn'>{loading?"Signing you up...":"Sign up"}</button>
                         </form>
                     </>}
             </div>

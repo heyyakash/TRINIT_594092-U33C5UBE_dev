@@ -12,7 +12,7 @@ const RightSIde = () => {
                       
                     {data.map((d)=>{
                         return(
-                            <Suggestions name = {`${d.firstname+" "+d.lastname}`} type = {d.type} key = {d._id} id = {d._id} />
+                            <Suggestions name = {`${d.orgname?d.orgname:d.firstname+" "+d.lastname}`} image = {d.image} type = {d.type} key = {d._id} id = {d._id} />
                         )
                     })}
 
