@@ -65,7 +65,7 @@ api.post("/signup_user",(req,res)=>{
  });
 
  api.post("/signup_ngo",(req,res)=>{
-    const {email,password,firstname,lastname,mobile,orgname,ngotype,founded,bio} = req.body;
+    const {email,password,firstname,lastname,mobile,orgname,ngotype,age,bio} = req.body;
     const hash = bcrypt.hashSync(password,saltRounds)
     const NewNGO = new NGO({
         email: email,
@@ -75,7 +75,7 @@ api.post("/signup_user",(req,res)=>{
         mobile:mobile,
         orgname:orgname,
         ngotype:ngotype,
-        founded:founded,
+        founded:age,
         type:"ngo",
         bio:bio,
     })
