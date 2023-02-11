@@ -13,8 +13,17 @@
 }
 
 @layer components{
+  .box{
+    @apply bg-white rounded-xl p-4;
+  }
+  .h2{
+    @apply text-xl font-bold;
+  }
   .navlink{
     @apply hover:bg-slate-100 smooth text-xl items-center  rounded-xl flex gap-3 p-2 cursor-pointer;
+  }
+  .active{
+    @apply bg-slate-200;
   }
   .smooth{
     @apply transition-all duration-150;
