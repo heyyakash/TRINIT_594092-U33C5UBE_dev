@@ -1,11 +1,12 @@
+import Link from 'next/link'
 import React from 'react'
 
 const Navlink = ({text,icon}) => {
     return (
-        <div className='navlink'>
+        <Link href = {`${text.toString().toLowerCase()}`} className='navlink'>
             {icon}
             <p className='text-xl'>{text}</p>
-        </div>
+        </Link>
     )
 }
 

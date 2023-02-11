@@ -27,4 +27,13 @@ const Login = () => {
   )
 }
 
+Login.getLayout = ({children}) => {
+  return(
+    <>
+      {children}
+    </>
+  )
+} 
+
 export default Login
+
