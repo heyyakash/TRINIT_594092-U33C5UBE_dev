@@ -88,14 +88,21 @@ api.post("/signup_user",(req,res)=>{
     User.findOne({username: username})
     .exec()
     .then((response)=>{
-        const valid = bcrypt.compareSync(password,response.password)
+        if(response){
+            const valid = bcrypt.compareSync(password,response.password)
         if(valid){
             session=req.session;
             session.userid = username;
-            res.status(200).json({message: "Login Successful"})
+            res.status(200).json({message: "Login Successful" , email: email, session: session  , firstname: response.firstname 
+        ,lastname:response.lastname , gender:response.gender, mobile:response.mobile,age:response.age,type:response.type,bio:response.bio,interests:response.interests})
         }
         else
         res.status(401).json({message:"Invalid Credentials"})
+        }
+        else{
+            res.status(401).json({message:"Invalid Credentials"})
+        }
+        
     })
     .catch((err)=>console.log(err))
  });
@@ -105,22 +112,19 @@ api.post("/signup_user",(req,res)=>{
     NGO.findOne({email: email})
     .exec()
     .then((response)=>{
-        console.log(password);
-        console.log(response);
         if(response){
             const valid = bcrypt.compareSync(password,response.password)
         if(valid){
             session=req.session;
             session.userid = email;
-            console.log(session);
-            console.log(email);
-            res.status(200).json({message: "Login Successful"})
+            res.status(200).json({message:"Login Successful" , email:email , session:session , firstname:response.firstname
+        ,lastname:response.lastname,mobile:response.mobile,orgname:response.orgname,ngotype:response.ngotype,founded:response.founded,type:response.type,bio:response.bio})
         }
         else
         res.status(401).json({message:"Invalid Credentials"})
         }
         else
-        res.status(404).json({message:"Invalid Credentials"})
+        res.status(401).json({message:"Invalid Credentials"})
         
     })
     .catch((err)=>console.log(err))
