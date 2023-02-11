@@ -3,7 +3,7 @@ import React from 'react'
 
 const Navlink = ({text,icon}) => {
     return (
-        <Link href = {`${text.toString().toLowerCase()}`} className='navlink'>
+        <Link href = {`/${text.toString().toLowerCase()}`} className='navlink'>
             {icon}
             <p className='text-xl'>{text}</p>
         </Link>

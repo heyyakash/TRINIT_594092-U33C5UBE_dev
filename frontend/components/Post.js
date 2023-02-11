@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {AiFillHeart,AiOutlineHeart,AiOutlineShareAlt} from 'react-icons/ai'
 import {BiDonateHeart} from 'react-icons/bi'
 
+
 const Post = () => {
     useEffect(()=>{
         setText("Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque sequi a possimus inventore illo officiis aspernatur error tempora dolorem animi.")
@@ -9,12 +10,14 @@ const Post = () => {
         setImage("https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bmF0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=2000&q=60")
     },[])
     const [text,setText] = useState(null)
+    const [show,setShow] = useState(false)
     const [name,setName] = useState (null)
     const [image,setImage] = useState(null)
     // const [liked,setLiked] =useState(true)
     return (
         name&&
         <section className='bg-white rounded-xl w-full'>
+          
             <div className="w-full p-4 ">
                 <div className="flex gap-4 border-b pb-4">
                     <img src={`/favicon.ico`} className="h-12 cursor-pointer  rounded-full" alt="" />
@@ -46,11 +49,23 @@ const Post = () => {
                         <AiOutlineShareAlt />
                         <p className='text-sm font-semibold'>Share</p>
                     </div>
-                    <div className='navlink flex justify-center'>
+                    <div onClick={()=>setShow(!show)} className='navlink flex justify-center'>
                         <BiDonateHeart />
                         <p className='text-sm font-semibold'>Donate</p>
                     </div>
 
+            </div>
+            <div className={`${show?"h-[150px]":"h-[0.1px]"} overflow-hidden smooth`}> 
+                    <div className="flex px-5">
+                        <div className="flex flex-col items-start gap-5">
+                            <img src="/upi-icon.svg" className='h-10 ' alt="" />
+                            <form>
+                                <input type="tel" className='form-input w-[200px]' placeholder='Enter the amount donated' />
+                                <input type="submit" value = "Submit" className='bg-green-500 ml-1 rounded-lg cursor-pointer  p-1.5 text-sm text-white' />
+                            </form>
+                        </div>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPR6BfGwMson05r7tzFpaK27RmCoPaJwl_vQ&usqp=CAU" className='h-[90%] ml-auto mr-3 w-[150px]' alt="" />
+                    </div>
             </div>
         </section>
     )

@@ -1,5 +1,6 @@
 import React from 'react'
 import Suggestions from './Suggestions'
+import data from '../data.json'
 
 const RightSIde = () => {
     return (
@@ -9,11 +10,18 @@ const RightSIde = () => {
                 <div className='flex flex-col gap-3 mt-4'>
                     
                       
+                    {data.map((d)=>{
+                        return(
+                            <Suggestions name = {`${d.firstname+" "+d.lastname}`} type = {d.type} key = {d._id} id = {d._id} />
+                        )
+                    })}
+
+{/* 
                       <Suggestions name={"Aditya Khattri"} type = "Donor" />
                       <Suggestions name={"Divyesh Jain"} type = "Donor" />
                       <Suggestions name={"Uttkarsh Raj"} type = "Donor" />
                       <Suggestions name={"Happy Life"} type = "NGO" />
-                      <Suggestions name={"Sed Life"} type = "NGO" />
+                      <Suggestions name={"Sed Life"} type = "NGO" /> */}
 
 
                     </div>

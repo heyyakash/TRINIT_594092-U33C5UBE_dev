@@ -5,7 +5,7 @@ import {CgProfile} from 'react-icons/cg'
 import {FaSearch} from 'react-icons/fa'
 import Navlink from '../components/Navlink'
 
-const LeftSide = () => {
+const LeftSide = ({setShow}) => {
   return (
     <div className='fixed w-[300px] '>
     <div className='bg-white p-5 rounded-xl w-full flex gap-3 flex-col'>
@@ -13,7 +13,7 @@ const LeftSide = () => {
         <Navlink icon = {<CgProfile />} text = "Profile" /> 
         <Navlink icon = {<FaSearch />} text = "Find" /> 
         <Navlink icon = {<MdSettings />} text = "Settings" /> 
-        <div className='bg-green-500 rounded-xl text-white hover:text-green-500 hover:bg-white smooth p-3 grid place-items-center font-semibold cursor-pointer text-xl'>Post</div>
+        <div onClick={()=>setShow(true)} className='bg-green-500 rounded-xl text-white hover:text-green-500 hover:bg-white smooth p-3 grid place-items-center font-semibold cursor-pointer text-xl'>Post</div>
     </div>
     <div className='bg-white p-5 mt-7 rounded-xl min-h-[400px] w-full flex gap-3 flex-col'>
         <p className='font-semibold text-xl '>Recent Posts</p>
