@@ -58,7 +58,7 @@ const Post = ({text,name,image,profile,upi}) => {
                             </form>
                         </div>
                         <img src={`https://upiqr.in/api/qr?name=Akash&vpa=${upi}`} className='h-[70%]  ml-auto mr-3 w-[150px]' alt="" />
-                    </div>
+                    </div>success:false
             </div>
         </section>
     )

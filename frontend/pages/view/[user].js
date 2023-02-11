@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
+import Home from '../../components/Home'
 import ProfileComponent from '../../components/Profile'
 import data from '../../data.json'
 import Profile from '../profile'
@@ -17,10 +18,11 @@ const View = () => {
   }, [user])
   
   return (
-    <div className='flex flex-col w-full'>
+    <div className='flex flex-col gap-5 w-full'>
       <div className='w-full box'>
         <ProfileComponent d = {d} />
       </div>
+      <Home />
     </div>
   )
 }

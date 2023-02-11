@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('../models/users');
 const cookieParser=require('cookie-parser');
+const Post = require('../models/posts')
 const sessions = require('express-session');
 
 
@@ -131,25 +132,19 @@ api.post("/signup_user",(req,res)=>{
  });
 
  api.post("/post" , (req,res)=>{
-    session = req.session;
-    var d = Date(Date.now());
-    a = d.toString()
-    if(session.userid){
-        const {email , firstname,lastname,content,image,date,upi} = req.body;
+ 
+        const {email , name,content,image,date,upi} = req.body;
+        console.log(req.body)
         const newPost = new Post({
             email:email,
-            firstname:firstname,
-            lastname:lastname,
+            name,
             content:content,
             image: image,
-            date: a,
+            date: date,
             upi:upi
         });
         newPost.save();
         res.status(200).json({message:"Success"})
-    }
-    else
-    res.status(200).json({message:"Inactive Session",})
  });
 
  api.get("/logout",(req,res)=>{
@@ -157,6 +152,16 @@ api.post("/signup_user",(req,res)=>{
     console.log("Session ended");
     res.redirect('/');
 });
+
+
+api.get("/post",async(req,res)=>{
+    try {
+        const data = await Post.find({})
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).json({error:true})
+    }
+})
 
 
 api.get("/filter/:type",async(req,res)=>{

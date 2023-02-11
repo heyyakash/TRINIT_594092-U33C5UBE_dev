@@ -17,7 +17,16 @@ const Main = ({ children }) => {
 
     const onSubmit = async (data) => {
         const payload = {...data,email:d.email,name:d.orgname?d.orgname: d.firstname + " " + d.lastname,date:(new Date()).toString()}
-        console.log(payload)
+        const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/post`,{
+            method:"POST",
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(payload)
+        })
+        const result = await res.json()
+        console.log(result)
+        setShow(false)
     }
 
     return (
