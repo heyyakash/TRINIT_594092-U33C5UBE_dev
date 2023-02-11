@@ -1,13 +1,14 @@
 import Link from 'next/link'
 import React, { useEffect } from 'react'
 
-const Suggestions = ({ name, id,type,image }) => {
+const Suggestions = ({ name, id,type,image ,data}) => {
     // useEffect(()=>{})
     return (
-        <Link href = {`/view/${id}`}>
+        data&&
+        <Link href = {`/view/${data._id}`} className = "w-full">
         <div className='flex bg-slate-100 cursor-pointer p-3 gap-3 items-center rounded-xl'>
             <div className='w-10 h-10 rounded-full bg-black overflow-hidden'>
-                <img src={image} alt="" />
+                <img src={image || "https://picsum.photos/200"} alt="" />
 
             </div>
 

@@ -12,16 +12,11 @@ const RightSIde = () => {
                       
                     {data.map((d)=>{
                         return(
-                            <Suggestions name = {`${d.orgname?d.orgname:d.firstname+" "+d.lastname}`} image = {d.image} type = {d.type} key = {d._id} id = {d._id} />
+                            <Suggestions name = {`${d.orgname?d.orgname:d.firstname+" "+d.lastname}`} image = {d.image} type = {d.type} key = {d._id} id = {d._id} data ={d} />
                         )
                     })}
 
-{/* 
-                      <Suggestions name={"Aditya Khattri"} type = "Donor" />
-                      <Suggestions name={"Divyesh Jain"} type = "Donor" />
-                      <Suggestions name={"Uttkarsh Raj"} type = "Donor" />
-                      <Suggestions name={"Happy Life"} type = "NGO" />
-                      <Suggestions name={"Sed Life"} type = "NGO" /> */}
+
 
 
                     </div>

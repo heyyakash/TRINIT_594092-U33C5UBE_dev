@@ -1,6 +1,15 @@
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useState } from 'react'
 
 const Search = () => {
+    const [value,setValue] = useState("")
+    const router= useRouter()
+    const handleSearch = (e)=>{
+        e.preventDefault()
+        if(value!==""){
+            router.push(`/search/${value}`)
+        }
+    }
     return (
         <>
             <form>
@@ -10,7 +19,7 @@ const Search = () => {
                 >
                     Search
                 </label>
-                <div className="relative w-[500px]">
+                <div className="relative w-[500px] flex">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg
                             aria-hidden="true"
@@ -30,13 +39,17 @@ const Search = () => {
                     </div>
                     <input
                         type="search"
+                        value = {value}
+                        onChange = {(e)=>setValue(e.target.value)}
                         id="default-search"
                         className="block w-full p-2.5  pl-10 text-sm text-gray-900 border border-gray-300 rounded-[80px] bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
                         placeholder="Search Mockups, Logos..."
                         required=""
                     />
+                    <button disabled = {value.length===0?true:false} onClick = {(e)=>handleSearch(e)} className='bg-slate-200 disabled:opacity-20 rounded-[60px] ml-3 px-5'>Search</button>
         
                 </div>
+                
             </form>
         </>
     )

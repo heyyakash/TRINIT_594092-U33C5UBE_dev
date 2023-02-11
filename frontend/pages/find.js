@@ -1,9 +1,28 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Suggestions from '../components/Suggestions'
 
 const Find = () => {
     const [filter, setFilter] = useState(null)
-    const [type, setType] = useState(null)
+    // const [type, setType] = useState(null)
+    const [data,setData] = useState([])
+
+    useEffect(()=>{
+        getData()
+        // console.log(data)
+    },[filter])
+
+    const getData = async () => {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/filter/${filter}`)
+        const result = await res.json();
+        if (result.success!==false) {
+            console.log(result)
+            setData(result)
+        }   
+        else{
+            setData([])
+        }
+    }
+
     return (
         <div className='flex flex-col w-full'>
             <div className="flex flex-col gap-3 box">
@@ -19,23 +38,25 @@ const Find = () => {
                     <div className={`navlink border ${filter === "Education" ? "active" : ""}`} onClick={() => setFilter("Education")}>Education Relief</div>
                 </div>
 
-                <h2 className='h2'>Type</h2>
+                {/* <h2 className='h2'>Type</h2>
                 <div className='flex flex-wrap gap-3'>
                     <div className={`navlink border ${type === "Donor" ? "active" : ""}`} onClick={() => setType('Donor')}>Donor</div>
                     <div className={`navlink border ${type === "NGO" ? "active" : ""}`} onClick={() => setType('NGO')}>NGO</div>
-                </div>
+                </div> */}
                 <button className='bg-red-500 p-2 text-white rounded-xl' onClick={() => {
                     setFilter(null)
-                    setType(null)
+                    // setType(null)
                 }}>Reset</button>
             </div>
-            {!filter && !type ? (
+            {filter ===null? (
                 <div className='box grid place-items-center mt-6'>
                     <p className='text-sm text-gray-400 py-10'>No Results</p>
-                </div>) : 
-                (<div className='mt-6'>
-                    <Suggestions name={"Akash Sharma"} type = {type} />
-                </div>)} 
+                </div>) :
+                (<div className='mt-6 flex flex-col gap-3'>
+                    {data && data.map((d)=>
+                        <Suggestions key = {d._id} name={d.orgname} data = {d} />
+                    )}
+                </div>)}
 
         </div>
     )

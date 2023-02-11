@@ -137,4 +137,32 @@ api.post("/signup_user",(req,res)=>{
     res.redirect('/');
 });
 
+
+api.get("/filter/:type",async(req,res)=>{
+    const {type} =req.params
+    console.log(type)
+    try {
+        const data = await NGO.find({ngotype:type})
+        console.log(data)
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).json({msg:"Some Error",success:false})
+    }
+})
+
+api.get('/info/:id',async(req,res)=>{
+    try {
+        const {id} = req.params
+        const data = await NGO.findOne({_id:id}).select('-password')
+        if(!data){
+            data = await User.findOne({_id:id}).select('-password')
+            return res.status(200).json(data)
+        }
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).json({msg:"Some Error"})
+    }
+})
+
+
 module.exports = api;

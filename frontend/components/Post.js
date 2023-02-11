@@ -3,28 +3,21 @@ import {AiFillHeart,AiOutlineHeart,AiOutlineShareAlt} from 'react-icons/ai'
 import {BiDonateHeart} from 'react-icons/bi'
 
 
-const Post = () => {
-    useEffect(()=>{
-        setText("Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque sequi a possimus inventore illo officiis aspernatur error tempora dolorem animi.")
-        setName("Akash Sharma")
-        setImage("https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bmF0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=2000&q=60")
-    },[])
-    const [text,setText] = useState(null)
+const Post = ({text,name,image,profile,upi}) => {
+
     const [show,setShow] = useState(false)
-    const [name,setName] = useState (null)
-    const [image,setImage] = useState(null)
-    // const [liked,setLiked] =useState(true)
     return (
         name&&
         <section className='bg-white rounded-xl w-full'>
           
             <div className="w-full p-4 ">
                 <div className="flex gap-4 border-b pb-4">
-                    <img src={`/favicon.ico`} className="h-12 cursor-pointer  rounded-full" alt="" />
+                    <img src={profile || `/favicon.ico`} className="h-12 cursor-pointer w-12 rounded-full" alt="" />
                     <div className="flex flex-col flex-grow">
                         <p className="">{name}</p>
-                        <p className="text-gray-500 text-sm">{(new Date()).toString()}</p>
+                        <p className="text-gray-500 text-sm">{(new Date()).toISOString().split('T')[0]}</p>
                     </div>
+                    
                 </div>
                 {text && (
                     <div className=" p-2 mt-2">
@@ -64,7 +57,7 @@ const Post = () => {
                                 <input type="submit" value = "Submit" className='bg-green-500 ml-1 rounded-lg cursor-pointer  p-1.5 text-sm text-white' />
                             </form>
                         </div>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPR6BfGwMson05r7tzFpaK27RmCoPaJwl_vQ&usqp=CAU" className='h-[90%] ml-auto mr-3 w-[150px]' alt="" />
+                        <img src={`https://upiqr.in/api/qr?name=Akash&vpa=${upi}`} className='h-[70%]  ml-auto mr-3 w-[150px]' alt="" />
                     </div>
             </div>
         </section>
