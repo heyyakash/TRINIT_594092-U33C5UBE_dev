@@ -84,15 +84,15 @@ api.post("/signup_user",(req,res)=>{
  });
 
  api.post("/login_user",(req,res)=>{
-    const {username,password} = req.body;
-    User.findOne({username: username})
+    const {email,password} = req.body;
+    User.findOne({email: email})
     .exec()
     .then((response)=>{
         if(response){
             const valid = bcrypt.compareSync(password,response.password)
         if(valid){
             session=req.session;
-            session.userid = username;
+            session.userid = email;
             res.status(200).json({message: "Login Successful" , email: email, session: session  , firstname: response.firstname 
         ,lastname:response.lastname , gender:response.gender, mobile:response.mobile,age:response.age,type:response.type,bio:response.bio,interests:response.interests})
         }
@@ -130,6 +130,27 @@ api.post("/signup_user",(req,res)=>{
     .catch((err)=>console.log(err))
  });
 
+ api.post("/post" , (req,res)=>{
+    session = req.session;
+    var d = Date(Date.now());
+    a = d.toString()
+    if(session.userid){
+        const {email , firstname,lastname,content,image,date,upi} = req.body;
+        const newPost = new Post({
+            email:email,
+            firstname:firstname,
+            lastname:lastname,
+            content:content,
+            image: image,
+            date: a,
+            upi:upi
+        });
+        newPost.save();
+        res.status(200).json({message:"Success"})
+    }
+    else
+    res.status(200).json({message:"Inactive Session",})
+ });
 
  api.get("/logout",(req,res)=>{
     req.session.destroy();
