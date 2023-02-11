@@ -12,7 +12,8 @@ const UserSchema = new mongoose.Schema({
     bio: String,
     interests:{
         type: [String]
-    }
+    },
+    img:String
 })
 
 module.exports = mongoose.model('Users' , UserSchema);

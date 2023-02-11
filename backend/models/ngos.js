@@ -12,6 +12,7 @@ const NGOSchema = new mongoose.Schema({
     founded: Number,
     type: String,
     bio: String,
+    img: String
 });
 
 module.exports = mongoose.model('NGO' , NGOSchema);
