@@ -130,6 +130,27 @@ api.post("/signup_user",(req,res)=>{
     .catch((err)=>console.log(err))
  });
 
+ api.post("/post" , (req,res)=>{
+    session = req.session;
+    var d = Date(Date.now());
+    a = d.toString()
+    if(session.userid){
+        const {email , firstname,lastname,content,image,date,upi} = req.body;
+        const newPost = new Post({
+            email:email,
+            firstname:firstname,
+            lastname:lastname,
+            content:content,
+            image: image,
+            date: a,
+            upi:upi
+        });
+        newPost.save();
+        res.status(200).json({message:"Success"})
+    }
+    else
+    res.status(200).json({message:"Inactive Session",})
+ });
 
  api.get("/logout",(req,res)=>{
     req.session.destroy();
