@@ -15,7 +15,7 @@ const Home = () => {
     }, [])
 
     const getData = async () => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/post`)
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/post`)
         const result = await res.json()
         if (!result.error) {
             setData(result)

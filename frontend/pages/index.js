@@ -27,7 +27,7 @@ const Login = () => {
       try {
           setLoading(true)
           const d = data
-          const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/${type === "Donor" ? "login_user" : "login_ngo"}`, {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/${type === "Donor" ? "login_user" : "login_ngo"}`, {
               method: "POST",
               headers: {
                   "Content-Type": "application/json"
