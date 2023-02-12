@@ -35,7 +35,6 @@ const Login = () => {
               body: JSON.stringify(d)
           })
           const result = await res.json()
-          console.log(result)
           setLoading(false)
           if(result.success){
             localStorage.setItem('session',JSON.stringify(result))

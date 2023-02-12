@@ -8,7 +8,6 @@ const Find = () => {
 
     useEffect(()=>{
         getData()
-        // console.log(data)
     },[filter])
 
     const getData = async () => {

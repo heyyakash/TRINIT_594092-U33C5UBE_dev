@@ -43,7 +43,7 @@ const Search = () => {
                         onChange = {(e)=>setValue(e.target.value)}
                         id="default-search"
                         className="block w-full p-2.5  pl-10 text-sm text-gray-900 border border-gray-300 rounded-[80px] bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
-                        placeholder="Search Mockups, Logos..."
+                        placeholder="Search NGOs"
                         required=""
                     />
                     <button disabled = {value.length===0?true:false} onClick = {(e)=>handleSearch(e)} className='bg-slate-200 disabled:opacity-20 rounded-[60px] ml-3 px-5'>Search</button>
